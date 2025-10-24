@@ -1,0 +1,249 @@
+/* Menu Lateral de Navegação */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 24px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #7c4dff 0%, #b388ff 100%);
+    color: white;
+}
+
+.sidebar-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-subtitle {
+    font-size: 0.85em;
+    opacity: 0.9;
+    margin: 4px 0 0 0;
+    font-weight: 400;
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border-left: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(124, 77, 255, 0.1) 0%, rgba(179, 136, 255, 0.05) 100%);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.nav-item:hover::before {
+    width: 100%;
+}
+
+.nav-item:hover {
+    color: #ffffff;
+    border-left-color: #7c4dff;
+    background: rgba(124, 77, 255, 0.05);
+}
+
+.nav-item.active {
+    color: #ffffff;
+    border-left-color: #7c4dff;
+    background: linear-gradient(90deg, rgba(124, 77, 255, 0.15) 0%, rgba(179, 136, 255, 0.08) 100%);
+    font-weight: 600;
+}
+
+.nav-item.active::before {
+    width: 100%;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.nav-item:hover .nav-icon,
+.nav-item.active .nav-icon {
+    opacity: 1;
+}
+
+.nav-text {
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.nav-description {
+    font-size: 0.75em;
+    opacity: 0.7;
+    margin-top: 2px;
+    line-height: 1.2;
+}
+
+/* Botão de toggle do menu */
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #7c4dff 0%, #b388ff 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    z-index: 1001;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 6px 15px rgba(124, 77, 255, 0.4);
+}
+
+.sidebar-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 77, 255, 0.5);
+}
+
+.sidebar-toggle.open {
+    left: 240px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+/* Overlay para fechar o menu */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100vw;
+        left: -100vw;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .sidebar-toggle.open {
+        left: calc(100vw - 68px);
+    }
+}
+
+/* Animações suaves */
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.nav-item {
+    animation: slideIn 0.3s ease forwards;
+}
+
+.nav-item:nth-child(1) { animation-delay: 0.1s; }
+.nav-item:nth-child(2) { animation-delay: 0.2s; }
+.nav-item:nth-child(3) { animation-delay: 0.3s; }
+.nav-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Indicador de página atual */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #7c4dff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(124, 77, 255, 0.6);
+}
+
+/* Seção inferior do menu */
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-footer-text {
+    font-size: 0.75em;
+    color: #888;
+    text-align: center;
+    margin: 0;
+}
+
+/* Estados de hover melhorados */
+.nav-item:hover .nav-text {
+    transform: translateX(2px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-item:active {
+    transform: scale(0.98);
+    transition: transform 0.2s ease-in-out;
+}
