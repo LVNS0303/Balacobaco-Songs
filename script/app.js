@@ -142,7 +142,7 @@
         id: musica.id,
         nome: musica.nome || '(Sem título)',
         // Salva o caminho relativo da capa
-        capa: musica.capa || '/static/assets/default-album.svg', 
+        capa: musica.capa || '/static/assets/default-album.png', 
         playedAt: new Date().toISOString()
       };
 
@@ -170,7 +170,7 @@
           id: musica.id,
           nome: musica.nome || '(Sem título)',
           // Salva o caminho relativo da capa
-          capa: musica.capa || '/static/assets/default-album.svg',
+          capa: musica.capa || '/static/assets/default-album.png',
           contagem: 0,
           ultimoToque: new Date().toISOString()
         };
