@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balacobaco's Uploads</title>
+    <link rel="stylesheet" href="/static/styles/estilo_upload.css">
+    <link rel="stylesheet" href="/static/styles/sidebar.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 SpotiFácil</h1>
+            <p class="subtitle">Sistema de Gerenciamento de Músicas</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <h2>Fazer Upload de Música</h2>
+                <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Nome da Música</label>
+                        <input type="text" id="name" name="name" required placeholder="Digite o nome da música">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audio_file">Arquivo de Áudio</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="audio_file" name="audio_file" accept="audio/*" required>
+                            <span class="file-name" id="audioFileName">Nenhum arquivo selecionado</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_file">Imagem da Capa</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="image_file" name="image_file" accept="image/*">
+                            <span class="file-name" id="imageFileName">Nenhuma imagem selecionada</span>
+                        </div>
+                        <div class="preview-container" id="imagePreview" style="display: none;">
+                            <img id="previewImage" src=\"#\" alt="Preview da Capa">
+                        </div>
+                        <div class="preview-placeholder" id="previewPlaceholder">
+                            <span>Preview</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span class="btn-text">Enviar Música</span>
+                        <span class="btn-loader" style="display: none;">Enviando...</span>
+                    </button>
+                </form>
+
+                <div id="message" class="message"></div>
+            </section>
+
+            <section class="songs-section">
+                <h2>Músicas Cadastradas</h2>
+                <div class="songs-controls">
+                    <input type="text" id="searchInput" placeholder="Buscar por nome da música..." class="search-input">
+                    <button id="refreshBtn" class="btn-refresh">🔄 Atualizar</button>
+                </div>
+                <div id="songsList" class="songs-list">
+                    <p class="loading">Carregando músicas...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script/sidebar.js"></script>
+    <script src="/static/script/upload.js"></script>
+</body>
+
+</html>
