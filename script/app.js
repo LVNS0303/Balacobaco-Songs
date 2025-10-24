@@ -33,7 +33,8 @@
   // --- Estado da aplicação ---
   let musicasCarregadas = [];
   let musicaAtualIndex = -1;
-  let baseUrl = 'https://8080-ic5vq75iskhatcvimpqj8-ead15961.manusvm.computer';
+  // --- CORREÇÃO 1: baseUrl deve começar vazia ---
+  let baseUrl = ''; 
   let isDragging = false;
   let lastProcessedSongId = null;
 
@@ -66,6 +67,7 @@
 
   function juntarUrl(base, relativo) {
     if (!base) return relativo;
+    // Esta função remove a / do final da base e a / do início do relativo para evitar barras duplas
     return base.replace(/\/+$/, '') + '/' + (relativo || '').replace(/^\/+/, '');
   }
 
@@ -76,11 +78,25 @@
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   }
 
+  // --- CORREÇÃO 2: Lógica de getImageUrl corrigida ---
   function getImageUrl(img) {
     const defaultCover = '/static/assets/default-album.svg';
-    if (!img) return defaultCover;
-    if (img.startsWith('http') || img.startsWith('/') || img.startsWith('data:')) return img;
-    return `${baseUrl}${img}`;
+    let imagePath = img || defaultCover;
+
+    // Se já for uma URL completa (http ou data), retorne-a.
+    if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
+        return imagePath;
+    }
+    
+    // Se o caminho for relativo (ex: /static/...) E a baseUrl (da API) estiver definida,
+    // junte a URL da API com o caminho da imagem.
+    if (baseUrl) {
+        return juntarUrl(baseUrl, imagePath);
+    }
+    
+    // Caso contrário (antes de conectar), apenas retorne o caminho relativo.
+    // O navegador vai tentar buscar localmente (e falhar), o que é normal.
+    return imagePath;
   }
 
   // --- FUNÇÃO: Mostrar/Ocultar Player ---
@@ -125,7 +141,8 @@
       const novaEntrada = {
         id: musica.id,
         nome: musica.nome || '(Sem título)',
-        capa: musica.capa || '/static/assets/default-album.svg',
+        // Salva o caminho relativo da capa
+        capa: musica.capa || '/static/assets/default-album.svg', 
         playedAt: new Date().toISOString()
       };
 
@@ -152,6 +169,7 @@
         maisTocadas[musica.id] = {
           id: musica.id,
           nome: musica.nome || '(Sem título)',
+          // Salva o caminho relativo da capa
           capa: musica.capa || '/static/assets/default-album.svg',
           contagem: 0,
           ultimoToque: new Date().toISOString()
@@ -261,6 +279,7 @@
   function carregarImagemMusica(musica) {
     if (!albumArt) return;
     try {
+      // getImageUrl agora montará a URL completa
       const imgUrl = getImageUrl(musica.capa);
       albumArt.src = imgUrl;
     } catch (err) {
@@ -277,7 +296,8 @@
 
     if (!audioEl || !currentTitle) return;
 
-    const audioSrc = `${baseUrl}${musica.musica}`;
+    // --- CORREÇÃO 3: Usar juntarUrl para o áudio ---
+    const audioSrc = juntarUrl(baseUrl, musica.musica);
     audioEl.src = audioSrc;
     currentTitle.textContent = musica.nome;
 
@@ -358,7 +378,8 @@
 
     musicas.forEach((song, index) => {
       const safeName = song.nome || '(Sem título)';
-      const imageUrl = getImageUrl(song.capa);
+      // getImageUrl agora vai montar a URL completa
+      const imageUrl = getImageUrl(song.capa); 
 
       const card = document.createElement('div');
       card.className = 'song-card';
@@ -426,11 +447,11 @@
     setupConnection();
     setupPlayerControls();
     setupSearch();
-    carregarMusicas();
+    // A linha carregarMusicas() foi movida para dentro de setupConnection
+    // para garantir que a URL seja carregada do localStorage antes de buscar
   }
 
   // Inicia a aplicação
   init();
 
 })();
-
