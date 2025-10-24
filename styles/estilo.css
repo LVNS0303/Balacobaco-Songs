@@ -233,7 +233,7 @@ header h1 {
     transition: transform 0.1s ease;
 }
 
-/* Botão Play/Pause Especial */
+/* Botão Play/Pause Especial - CORRIGIDO */
 .controls-player .play-pause {
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     width: 60px;
@@ -243,18 +243,9 @@ header h1 {
     z-index: 2;
 }
 
-.controls-player .play-pause::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent));
-    border-radius: 50%;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* CORREÇÃO: Garantir que o ícone de play sempre apareça quando pausado */
+.controls-player .play-pause #playIcon {
+    display: block;
 }
 
 .controls-player .play-pause:hover {
@@ -291,7 +282,6 @@ header h1 {
     opacity: 1;
     pointer-events: none;
     z-index: 1;
-    /* Colocamos atrás dos ícones, mas se estiver cobrindo, mude para 0 */
     transition: transform 0.6s linear, opacity 0.6s linear;
 }
 
