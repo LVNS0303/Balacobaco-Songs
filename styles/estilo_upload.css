@@ -38,23 +38,6 @@ header {
     padding-top: 20px;
 }
 
-.logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px rgba(124, 77, 255, 0.3);
-}
-
-.logo i {
-    font-size: 1.8rem;
-    color: white;
-}
-
 header h1 {
     font-size: 2.5rem;
     font-weight: 800;
@@ -73,59 +56,6 @@ header h1 {
     margin: 0 auto;
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 32px;
-}
-
-.stat-card {
-    background: linear-gradient(145deg, var(--card), #0d0d0d);
-    border-radius: var(--radius);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-.stat-icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(124, 77, 255, 0.1);
-    border-radius: 50%;
-    margin-bottom: 12px;
-    color: var(--accent);
-    font-size: 1.4rem;
-}
-
-.stat-value {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 4px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: var(--muted);
-}
-
 main {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -138,7 +68,7 @@ main {
     }
 }
 
-.card {
+.upload-section {
     background: linear-gradient(145deg, var(--card), #0d0d0d);
     border-radius: var(--radius);
     padding: var(--pad);
@@ -149,7 +79,7 @@ main {
     overflow: hidden;
 }
 
-.card::before {
+.upload-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -159,30 +89,21 @@ main {
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 50px rgba(2, 2, 6, 0.7);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-.card-header {
+.upload-section h2 {
     display: flex;
     align-items: center;
     margin-bottom: 24px;
     padding-bottom: 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.card-header i {
-    font-size: 1.4rem;
-    margin-right: 12px;
-    color: var(--accent);
-}
-
-.card-header h2 {
     color: #fff;
     font-size: 1.4rem;
     font-weight: 700;
+}
+
+.upload-section h2::before {
+    content: '📤';
+    font-size: 1.4rem;
+    margin-right: 12px;
 }
 
 .form-group {
@@ -197,7 +118,8 @@ main {
     font-size: 0.95rem;
 }
 
-.form-control {
+/* Estilização dos inputs de texto */
+input[type="text"] {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -206,20 +128,31 @@ main {
     background: var(--glass);
     color: #eaf0f6;
     transition: all 0.3s ease;
+    font-family: inherit;
 }
 
-.form-control:focus {
+input[type="text"]:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.15);
     background: rgba(255, 255, 255, 0.05);
 }
 
+/* Estilização dos inputs de arquivo */
 .file-input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+    z-index: -1;
 }
 
 .file-input-label {
@@ -233,20 +166,26 @@ main {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9rem;
+    color: var(--muted);
+    flex-shrink: 0;
 }
 
 .file-input-label:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: var(--accent);
+    color: #fff;
 }
 
 .file-name {
     color: var(--muted);
     font-size: 0.85rem;
     flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.btn {
+.btn-submit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -259,36 +198,30 @@ main {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-}
-
-.btn-primary {
+    font-family: inherit;
+    width: 100%;
     background: linear-gradient(180deg, var(--accent), var(--accent-2));
     color: #fff;
     box-shadow: 0 12px 30px rgba(124, 77, 255, 0.15);
 }
 
-.btn-primary:hover {
+.btn-submit:hover {
     transform: translateY(-3px);
     box-shadow: 0 20px 50px rgba(124, 77, 255, 0.25);
 }
 
-.btn-block {
-    width: 100%;
-}
-
-.btn:disabled {
+.btn-submit:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none !important;
 }
 
-.image-preview {
+.preview-container {
     margin-top: 15px;
     text-align: center;
-    display: none;
 }
 
-.preview-image {
+.preview-container img {
     max-width: 100%;
     max-height: 200px;
     border-radius: 10px;
@@ -309,9 +242,11 @@ main {
     color: var(--muted);
     font-size: 0.9rem;
     gap: 8px;
+    margin-top: 10px;
 }
 
-.preview-placeholder i {
+.preview-placeholder::before {
+    content: '🖼️';
     font-size: 1.5rem;
     opacity: 0.7;
 }
@@ -356,18 +291,42 @@ main {
     border-left-color: #dc3545;
 }
 
-.message.success::before {
-    content: "✔ ";
-    margin-right: 6px;
-}
-
-.message.error::before {
-    content: "⚠ ";
-    margin-right: 6px;
-}
-
 .songs-section {
     grid-column: 1 / -1;
+    background: linear-gradient(145deg, var(--card), #0d0d0d);
+    border-radius: var(--radius);
+    padding: var(--pad);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.songs-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.songs-section h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.songs-section h2::before {
+    content: '🎵';
+    font-size: 1.4rem;
+    margin-right: 12px;
 }
 
 .songs-controls {
@@ -377,29 +336,18 @@ main {
     flex-wrap: wrap;
 }
 
-.search-container {
-    position: relative;
-    flex: 1;
-    min-width: 250px;
-}
-
-.search-container i {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-}
-
 .search-input {
     width: 100%;
-    padding: 14px 16px 14px 44px;
+    padding: 14px 16px;
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 10px;
     font-size: 0.95rem;
     background: var(--glass);
     color: #eaf0f6;
     transition: all 0.3s ease;
+    font-family: inherit;
+    flex: 1;
+    min-width: 250px;
 }
 
 .search-input:focus {
@@ -420,6 +368,7 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-family: inherit;
 }
 
 .btn-refresh:hover {
@@ -432,6 +381,12 @@ main {
     overflow-y: auto;
     display: grid;
     gap: 16px;
+}
+
+.loading {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
 }
 
 .song-card {
@@ -534,129 +489,6 @@ main {
     transform: scale(1.05);
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
-}
-
-.modal-box {
-    background: var(--card);
-    color: #fff;
-    border-radius: 14px;
-    padding: 28px;
-    width: 380px;
-    max-width: 90%;
-    box-shadow: var(--shadow);
-    text-align: center;
-    animation: pop 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.modal-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-    color: #dc3545;
-}
-
-.modal-box h3 {
-    margin-bottom: 12px;
-    font-size: 1.4rem;
-}
-
-.modal-box p {
-    margin-bottom: 24px;
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.btn-confirm {
-    padding: 12px 24px;
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-confirm:hover {
-    background: #c82333;
-    transform: translateY(-2px);
-}
-
-.btn-cancel {
-    padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-2px);
-}
-
-@keyframes pop {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.loading {
-    text-align: center;
-    color: var(--muted);
-    padding: 40px 20px;
-}
-
-.loading i {
-    font-size: 2rem;
-    margin-bottom: 16px;
-    opacity: 0.7;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-}
-
-.empty-state i {
-    font-size: 3rem;
-    margin-bottom: 16px;
-    opacity: 0.5;
-}
-
-.empty-state h3 {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-    color: #fff;
-}
-
 .songs-list::-webkit-scrollbar {
     width: 8px;
 }
@@ -673,4 +505,37 @@ main {
 
 .songs-list::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+/* Adicionando estilos para os labels dos file inputs */
+.file-input-wrapper label.file-input-label::before {
+    content: '📁';
+    margin-right: 8px;
+}
+
+.file-input-wrapper label.file-input-label[for="audio_file"]::before {
+    content: '🎵';
+}
+
+.file-input-wrapper label.file-input-label[for="image_file"]::before {
+    content: '🖼️';
+}
+
+/* Estilos para o estado de foco nos file inputs */
+.file-input-wrapper:focus-within .file-input-label {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Estilos para o botão de submit quando está carregando */
+.btn-loader {
+    display: none;
+}
+
+.btn-submit.loading .btn-text {
+    display: none;
+}
+
+.btn-submit.loading .btn-loader {
+    display: inline;
 }
