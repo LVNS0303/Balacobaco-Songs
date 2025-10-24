@@ -4,7 +4,7 @@
 
     // --- Configurações Globais ---
     const LOCAL_STORAGE_KEY = "spotify_facil_history";
-    const DEFAULT_COVER = "/static/assets/default-album.svg";
+    const DEFAULT_COVER = "/static/assets/default-album.png";
 
     // --- Elementos da Página de Histórico ---
     let tbody, statusEl, pageInfo, pageSizeSelect, prevPageBtn, nextPageBtn;
