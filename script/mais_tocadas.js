@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const lista = document.getElementById("lista-mais-tocadas");
-    const DEFAULT_COVER = "/static/assets/default-album.svg"; // Caminho para sua imagem padrão
+    const DEFAULT_COVER = "/static/assets/default-album.png"; // Caminho para sua imagem padrão
     const LOCAL_STORAGE_KEY = "mais_tocadas"; // Chave definida no app.js
 
     try {
@@ -49,4 +49,5 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Erro ao ler 'mais tocadas' do LocalStorage:", error);
         lista.innerHTML = "<li>Erro ao carregar músicas mais tocadas.</li>";
     }
+
 });
