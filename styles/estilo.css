@@ -442,7 +442,8 @@ main {
 
 .songs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    /* --- CORREÇÃO 1: Tamanho do grid alterado para ~120px --- */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 30px;
 }
 
@@ -471,7 +472,8 @@ main {
     background: linear-gradient(135deg, #252428, var(--card));
 }
 
-.song-card .cover {
+/* --- CORREÇÃO 2: Seletor .cover alterado para .album-art-container --- */
+.song-card .album-art-container {
     position: relative;
     aspect-ratio: 1 / 1;
     overflow: hidden;
@@ -573,7 +575,7 @@ main {
 }
 
 /* Estado de loading para as imagens */
-.song-card.loading .cover {
+.song-card.loading .album-art-container {
     background: linear-gradient(90deg, var(--card), #2a2a2e, var(--card));
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
@@ -601,7 +603,8 @@ main {
 /* --- Responsividade --- */
 @media (max-width: 1200px) {
     .songs-grid {
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        /* --- CORREÇÃO 1 (Repetida) --- */
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 25px;
     }
 
@@ -618,7 +621,8 @@ main {
     }
 
     .songs-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        /* --- CORREÇÃO 1 (Repetida) --- */
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 20px;
     }
 
@@ -696,7 +700,8 @@ main {
     }
 
     .songs-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        /* --- CORREÇÃO 1 (Repetida) --- */
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 15px;
     }
 
@@ -789,4 +794,28 @@ main {
     50% {
         box-shadow: 0 6px 30px rgba(142, 68, 173, 0.7);
     }
+}
+
+/* --- CORREÇÃO 3: Regras para padronizar capas em OUTRAS páginas --- */
+/* (Adicionado para garantir 120x120 em todo o site) */
+
+/* Alvo: Página "Mais Tocadas" (mais_tocadas.js) */
+.song-cover,
+
+/* Alvo: Página "Histórico" (historico.js) */
+.history-cover,
+
+/* Alvo: Página "Upload" (upload.js) */
+.song-cover-manage {
+    width: 120px;         /* Define a largura exata */
+    height: 120px;        /* Define a altura exata */
+    
+    /* Preenche o espaço cortando o excesso, sem distorcer */
+    object-fit: cover;
+    
+    /* Opcional: para cantos arredondados consistentes */
+    border-radius: 8px; 
+    
+    /* Garante alinhamento correto */
+    display: block;
 }
