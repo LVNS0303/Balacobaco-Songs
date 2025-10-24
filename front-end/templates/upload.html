@@ -34,20 +34,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="image_file">Imagem da Capa (opcional)</label>
+                        <label for="image_file">Imagem da Capa</label>
                         <div class="file-input-wrapper">
                             <input type="file" id="image_file" name="image_file" accept="image/*">
-                            <span class="file-name" id="imageFileName">Nenhum arquivo selecionado</span>
+                            <span class="file-name" id="imageFileName">Nenhuma imagem selecionada</span>
                         </div>
-                    </div>
-
-
-
-                    <div class="image-preview" id="imagePreview">
+                        <div class="preview-container" id="imagePreview" style="display: none;">
+                            <img id="previewImage" src=\"#\" alt="Preview da Capa">
+                        </div>
                         <div class="preview-placeholder" id="previewPlaceholder">
-                            Pré-visualização da imagem aparecerá aqui
+                            <span>Preview</span>
                         </div>
-                        <img class="preview-image" id="previewImage" style="display: none;">
                     </div>
 
                     <button type="submit" class="btn-submit">
@@ -70,18 +67,6 @@
                 </div>
             </section>
         </main>
-    </div>
-
-    <!-- Modal de confirmação para exclusão -->
-    <div class="modal-overlay" id="deleteModal">
-        <div class="modal-box">
-            <h3>Confirmar Exclusão</h3>
-            <p>Tem certeza que deseja excluir esta música?</p>
-            <div class="modal-actions">
-                <button class="btn-cancel" id="cancelDelete">Cancelar</button>
-                <button class="btn-confirm" id="confirmDelete">Excluir</button>
-            </div>
-        </div>
     </div>
 
     <script src="/static/script/sidebar.js"></script>
