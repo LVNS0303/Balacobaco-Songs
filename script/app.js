@@ -80,7 +80,7 @@
 
   // --- CORREÇÃO 2: Lógica de getImageUrl corrigida ---
   function getImageUrl(img) {
-    const defaultCover = '/static/assets/default-album.svg';
+    const defaultCover = '/static/assets/default-album.png';
     let imagePath = img || defaultCover;
 
     // Se já for uma URL completa (http ou data), retorne-a.
