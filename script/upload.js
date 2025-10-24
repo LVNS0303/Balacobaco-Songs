@@ -257,10 +257,10 @@ function renderSongs(songsToRender) {
 
         // Garantir valores padrão
         const safeName = song.nome || 'Título desconhecido';
-        const safeImageUrl = song.capa || '/static/assets/default-album.svg';
+        const safeImageUrl = song.capa || '/static/assets/default-album.png';
         songCard.innerHTML = `
             <img src="${safeImageUrl}" alt="Capa do álbum" class="song-image" 
-                 onerror="this.src=\'/static/assets/default-album.svg\'\">
+                 onerror="this.src=\'/static/assets/default-album.png\'\">
             <div class="song-info">
                 <div class="song-title">${safeName}</div>
             </div>
